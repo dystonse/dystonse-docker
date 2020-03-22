@@ -24,6 +24,11 @@ CREATE DATABASE IF NOT EXISTS `dystonse` DEFAULT CHARACTER SET utf8mb4 COLLATE u
 USE `dystonse`;
 
 -- --------------------------------------------------------
+-- Von Hand exportiert und hierher kopiert, da Rechte sonst nicht vergeben wurden:
+GRANT USAGE ON *.* TO `dystonse`@`%`;
+
+GRANT ALL PRIVILEGES ON `dystonse`.* TO `dystonse`@`%`;
+-- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `realtime`
