@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Erstellungszeit: 22. Mrz 2020 um 22:18
+-- Erstellungszeit: 22. Mrz 2020 um 22:44
 -- Server-Version: 8.0.19
 -- PHP-Version: 7.4.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `dystonse`
 --
+CREATE DATABASE IF NOT EXISTS `dystonse` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `dystonse`;
 
 -- --------------------------------------------------------
 
