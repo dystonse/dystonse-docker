@@ -3,15 +3,16 @@ services:
   db:
     image: mysql:8
     volumes:
-      - datavolume:/var/lib/mysql
+      - dbvolume:/var/lib/mysql
       - ./secrets:/secrets
-      - ./db_init:/docker-entrypoint-initdb.d
+      - ./db:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /secrets/mysql_root_password
       MYSQL_USER: dystonse
       MYSQL_PASSWORD_FILE: /secrets/mysql_dystonse_password
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
     ports:
@@ -22,6 +23,11 @@ services:
       - db
     environment:
       PMA_HOST: db
+  
+  # collect-services are defined in docker-compose.override.yml which is
+  # not commited into the repository because of contained secret values
+  # see docker-compose.sample.yml
 
 volumes:
-  datavolume:
+  dbvolume:
+  filevolume:
