@@ -47,7 +47,8 @@ CREATE TABLE `realtime` (
   `time_departure_estimate` timestamp NULL DEFAULT NULL,
   `mode` tinyint NOT NULL,
   `delay_arrival` int DEFAULT NULL,
-  `delay_departure` int DEFAULT NULL
+  `delay_departure` int DEFAULT NULL,
+  `source` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
