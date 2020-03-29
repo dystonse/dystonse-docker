@@ -24,8 +24,8 @@ services:
     environment:
       PMA_HOST: db
   
-  # collect-services are defined in docker-compose.override.yml which is
-  # not commited into the repository because of contained secret values
+  # collect-services and import-services are defined in docker-compose.override.yml 
+  # which is not commited into the repository because of contained secret values
   # see docker-compose.sample.yml
 
 volumes:

@@ -1,11 +1,11 @@
 set -e
-DIR=/files
+COLLECT_DIR=/files/$GTFS_DATA_SOURCE_ID/schedule
 DATE=`date +"%Y-%m-%d"`
-mkdir -p $DIR/$GTFS_ID/schedule
-FILENAME_ZIP=$DIR/$GTFS_ID/schedule/gtfs-schedule-$DATE.zip
+mkdir -p $COLLECT_DIR
+FILENAME_ZIP=$COLLECT_DIR/gtfs-schedule-$DATE.zip
 
 curl -s $PING_SCHEDULE_URL/start
-curl $GTFS_SCHEDULE_URL -o $FILENAME_ZIP \
+curl $GTFS_SCHEDULE_URL -L -o $FILENAME_ZIP \
          --silent --show-error --retry-connrefused \
          --retry 20 --retry-max-time 100
 curl -s $PING_SCHEDULE_URL

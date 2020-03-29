@@ -18,6 +18,6 @@ RUN crontab /etc/cron.d/crontab.txt
 RUN touch /var/log/cron.log
 
 # Run the command on container startup
-CMD mkdir -p /files/$GTFS_ID && printenv | grep -v "no_proxy" >> /etc/environment && cron && tail -f /var/log/cron.log
+CMD mkdir -p /files/$GTFS_DATA_SOURCE_ID && printenv | grep -v "no_proxy" >> /etc/environment && cron && tail -f /var/log/cron.log
 
 # Taken from https://stackoverflow.com/questions/37458287/how-to-run-a-cron-job-inside-a-docker-container

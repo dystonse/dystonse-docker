@@ -5,8 +5,18 @@ services:
     volumes:
       - filevolume:/files
     environment:
-      GTFS_ID: vbn
+      GTFS_DATA_SOURCE_ID: vbn
       GTFS_RT_URL: http://gtfsr.vbn.de/gtfsr_connect.bin
       GTFS_SCHEDULE_URL: http://www.connect-info.net/opendata/gtfs/connect-nds-toplevel/ztqxhoilmd
       PING_RT_URL: https://hc-ping.com/<censored> # insert your real URL here
       PING_SCHEDULE_URL: https://hc-ping.com/<censored> # insert your real URL here
+import-vbn:
+    build: https://github.com/dystonse/dystonse-gtfs-importer.git
+    volumes:
+      - filevolume:/files
+    environment:
+      DB_HOST: db
+      DB_PASSWORD: "<censored>"
+      GTFS_DATA_SOURCE_ID: vbn
+    depends_on:
+      - db
