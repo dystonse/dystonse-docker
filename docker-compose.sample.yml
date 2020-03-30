@@ -18,5 +18,6 @@ import-vbn:
       DB_HOST: db
       DB_PASSWORD: "<censored>"
       GTFS_DATA_SOURCE_ID: vbn
+      PING_URL: https://hc-ping.com/<censored> # insert your real URL here
     depends_on:
       - db
