@@ -11,8 +11,8 @@ services:
       PING_RT_URL: https://hc-ping.com/<censored> # insert your real URL here
       PING_SCHEDULE_URL: https://hc-ping.com/<censored> # insert your real URL here
 import-vbn:
-    image: dystonse/dystonse-gtfs-data
-    # build: https://github.com/dystonse/dystonse-gtfs-data.git
+    # image: dystonse/dystonse-gtfs-data
+    build: https://github.com/dystonse/dystonse-gtfs-data.git#new_table_structure
     volumes:
       - filevolume:/files
     environment:
