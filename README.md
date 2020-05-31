@@ -6,7 +6,7 @@ We aim to create a docker-compose configuration which can be used to deploy the 
 * a _mysql_ database, 
 * a _phpmyadmin_ interface
 * data collection scripts which regurlary download gtfs schedules and realtime data, and store it in .zip files
-* the [dystonse-gtfs-importer](https://github.com/dystonse/dystonse-gtfs-importer) which reads those .zip files, connects schedules and realtime data, and writes the trip updates into the database
+* the [dystonse-gtfs-data](https://github.com/dystonse/dystonse-gtfs-data) tool, which reads those .zip files, connects schedules and realtime data, and writes the trip updates into the database
 
 After checkout:
 * create `secrets/mysql_dystonse_password`and `secrets/mysql_root_password` and write a password into each file. 
