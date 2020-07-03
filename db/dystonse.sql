@@ -31,14 +31,16 @@ GRANT ALL PRIVILEGES ON `dystonse`.* TO `dystonse`@`%`;
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `realtime`
+-- Tabellenstruktur für Tabelle `records`
 --
 
-CREATE TABLE `realtime` (
-  `id` int NOT NULL,
-  `trip_id` varchar(60) NOT NULL,
+CREATE TABLE `records` (
+  `source` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `route_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `route_variant` bigint UNSIGNED NOT NULL,
+  `trip_id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `date` date NOT NULL,
   `stop_id` varchar(80) NOT NULL,
-  `route_id` varchar(80) NOT NULL,
   `stop_sequence` tinyint NOT NULL,
   `time_of_recording` timestamp NOT NULL,
   `time_arrival_schedule` timestamp NULL DEFAULT NULL,
@@ -52,24 +54,39 @@ CREATE TABLE `realtime` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Indizes der exportierten Tabellen
+-- Indizes für die Tabelle `records`
 --
+ALTER TABLE `records`
+  ADD PRIMARY KEY (`source`(5),`route_id`(10),`route_variant`,`trip_id`(10),`date`,`stop_sequence`);
+COMMIT;
+
+
+
+-- --------------------------------------------------------
 
 --
--- Indizes für die Tabelle `realtime`
---
-ALTER TABLE `realtime`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT für exportierte Tabellen
+-- Tabellenstruktur für Tabelle `prediction_departure`
 --
 
+CREATE TABLE `prediction_departure` (
+  `stop_id` char(15) NOT NULL,
+  `min_departure` timestamp NOT NULL,
+  `max_departure` timestamp NOT NULL,
+  `route_id` char(15) NOT NULL,
+  `trip_id` char(15) NOT NULL,
+  `start_date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `stop_sequence` tinyint UNSIGNED NOT NULL,
+  `prediction_type` tinyint UNSIGNED NOT NULL,
+  `curve_departure` binary(120) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
--- AUTO_INCREMENT für Tabelle `realtime`
+-- Indizes für die Tabelle `prediction_departure`
 --
-ALTER TABLE `realtime`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `prediction_departure`
+  ADD PRIMARY KEY (`stop_id`,`start_date`,`route_id`,`trip_id`,`start_time`) USING BTREE,
+  ADD KEY `timespan` (`min_departure`,`max_departure`,`stop_id`,`start_date`) USING BTREE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
