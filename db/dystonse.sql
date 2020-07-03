@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Erstellungszeit: 22. Mrz 2020 um 22:44
+-- Erstellungszeit: 07. Mai 2020 um 18:36
 -- Server-Version: 8.0.19
 -- PHP-Version: 7.4.4
 
@@ -40,17 +40,12 @@ CREATE TABLE `records` (
   `route_variant` bigint UNSIGNED NOT NULL,
   `trip_id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` date NOT NULL,
-  `stop_id` varchar(80) NOT NULL,
   `stop_sequence` tinyint NOT NULL,
+  `stop_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `time_of_recording` timestamp NOT NULL,
-  `time_arrival_schedule` timestamp NULL DEFAULT NULL,
-  `time_arrival_estimate` timestamp NULL DEFAULT NULL,
-  `time_departure_schedule` timestamp NULL DEFAULT NULL,
-  `time_departure_estimate` timestamp NULL DEFAULT NULL,
-  `mode` tinyint NOT NULL,
   `delay_arrival` int DEFAULT NULL,
   `delay_departure` int DEFAULT NULL,
-  `source` varchar(60) NOT NULL
+  `schedule_file_name` varchar(254) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
