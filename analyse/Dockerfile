@@ -1,4 +1,4 @@
-FROM dystonse-gtfs-data
+FROM dystonse-gtfs-data:local
 MAINTAINER mail@dystonse.org
 
 RUN apt-get update && apt-get -y install cron curl zip

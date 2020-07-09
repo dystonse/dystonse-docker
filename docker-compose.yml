@@ -26,6 +26,7 @@ services:
   
   dystonse-gtfs-data:
     build: https://github.com/dystonse/dystonse-gtfs-data.git
+    image: dystonse-gtfs-data:local
     command: echo "hello world from dystonse-gtfs-data!"
     # not sure if this is enough to build an image that does nothing 
     # but that other containers can use as a parent image

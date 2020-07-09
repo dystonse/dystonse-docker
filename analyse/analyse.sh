@@ -1,2 +1,2 @@
 set -e
-dystonse-gtfs-data -v analyse --compute-curves all /files/$GTFS_DATA_SOURCE_ID/
+dystonse-gtfs-data analyse /files/$GTFS_DATA_SOURCE_ID/ compute-curves --all
