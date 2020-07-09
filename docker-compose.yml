@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.3"
 services:
   db:
     image: mysql:8
@@ -23,6 +23,12 @@ services:
       - db
     environment:
       PMA_HOST: db
+  
+  dystonse-gtfs-data:
+    build: https://github.com/dystonse/dystonse-gtfs-data.git
+    command: echo "hello world from dystonse-gtfs-data!"
+    # not sure if this is enough to build an image that does nothing 
+    # but that other containers can use as a parent image
   
   # collect-services and import-services are defined in docker-compose.override.yml 
   # which is not commited into the repository because of contained secret values
