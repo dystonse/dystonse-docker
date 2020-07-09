@@ -60,28 +60,30 @@ COMMIT;
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `prediction_departure`
+-- Tabellenstruktur für Tabelle `predictions`
 --
 
-CREATE TABLE `prediction_departure` (
+CREATE TABLE `predictions` (
+  `source` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `event_type` tinyint NOT NULL,
   `stop_id` char(15) NOT NULL,
-  `min_departure` timestamp NOT NULL,
-  `max_departure` timestamp NOT NULL,
+  `prediction_min` timestamp NOT NULL,
+  `prediction_max` timestamp NOT NULL,
   `route_id` char(15) NOT NULL,
   `trip_id` char(15) NOT NULL,
-  `start_date` date NOT NULL,
-  `start_time` time NOT NULL,
+  `trip_start_date` date NOT NULL,
+  `trip_start_time` time NOT NULL,
   `stop_sequence` tinyint UNSIGNED NOT NULL,
   `prediction_type` tinyint UNSIGNED NOT NULL,
-  `curve_departure` binary(120) NOT NULL
+  `prediction_curve` binary(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Indizes für die Tabelle `prediction_departure`
+-- Indizes für die Tabelle `predictions`
 --
-ALTER TABLE `prediction_departure`
-  ADD PRIMARY KEY (`stop_id`,`start_date`,`route_id`,`trip_id`,`start_time`) USING BTREE,
-  ADD KEY `timespan` (`min_departure`,`max_departure`,`stop_id`,`start_date`) USING BTREE;
+ALTER TABLE `predictions`
+  ADD PRIMARY KEY (`source`, `event_type`,`stop_sequence`,`trip_start_date`,`route_id`,`trip_id`,`trip_start_time`) USING BTREE,
+  ADD KEY `timespan` (`source`, `prediction_min`,`prediction_max`,`stop_id`,`trip_start_date`) USING BTREE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
