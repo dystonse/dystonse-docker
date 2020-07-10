@@ -10,15 +10,27 @@ services:
       GTFS_SCHEDULE_URL: http://www.connect-info.net/opendata/gtfs/connect-nds-toplevel/ztqxhoilmd
       PING_RT_URL: http://hc-ping.com/<censored> # insert your real URL here. HTTPS is not supported, use HTTP!
       PING_SCHEDULE_URL: http://hc-ping.com/<censored> # insert your real URL here. HTTPS is not supported, use HTTP!
+
   import-vbn:
-    # image: dystonse/dystonse-gtfs-data
-    build: https://github.com/dystonse/dystonse-gtfs-data.git
+    image: dystonse-gtfs-data:local
     volumes:
       - filevolume:/files
     environment:
+      GTFS_DATA_SOURCE_ID: vbn
       DB_HOST: db
       DB_PASSWORD: "<censored>"
+      PING_URL: http://hc-ping.com/<censored> # insert your real URL here. HTTPS is not supported, use HTTP!
+    depends_on:
+      - db
+    command: dystonse-gtfs-data -v import --record automatic /files/vbn/
+
+  analyse-vbn:
+    build: ./analyse
+    volumes:
+      - filevolume:/files
+    environment:
       GTFS_DATA_SOURCE_ID: vbn
-      PING_URL: https://hc-ping.com/<censored> # insert your real URL here
+      DB_HOST: db
+      DB_PASSWORD: "<censored>"
     depends_on:
       - db
