@@ -39,7 +39,8 @@ CREATE TABLE `records` (
   `route_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `route_variant` bigint UNSIGNED NOT NULL,
   `trip_id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `date` date NOT NULL,
+  `trip_start_date` date NOT NULL,
+  `trip_start_time` time NOT NULL,
   `stop_sequence` tinyint NOT NULL,
   `stop_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `time_of_recording` timestamp NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE `records` (
 -- Indizes für die Tabelle `records`
 --
 ALTER TABLE `records`
-  ADD PRIMARY KEY (`source`(5),`route_id`(10),`route_variant`,`trip_id`(10),`date`,`stop_sequence`);
+  ADD PRIMARY KEY (`source`(5),`route_id`(10),`route_variant`,`trip_id`(10),`trip_start_date`,`trip_start_time`,`stop_sequence`);
 COMMIT;
 
 
