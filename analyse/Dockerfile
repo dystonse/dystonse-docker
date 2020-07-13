@@ -1,8 +1,6 @@
 FROM dystonse-gtfs-data:local
 MAINTAINER mail@dystonse.org
 
-RUN apt-get update && apt-get -y install cron curl zip
-
 # Copy crontab.txt file to the cron.d directory
 COPY crontab.txt /etc/cron.d/crontab.txt
 COPY *.sh /

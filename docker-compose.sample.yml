@@ -22,7 +22,7 @@ services:
       PING_URL: http://hc-ping.com/<censored> # insert your real URL here. HTTPS is not supported, use HTTP!
     depends_on:
       - db
-    command: dystonse-gtfs-data -v import --record automatic /files/vbn/
+    command: dystonse-gtfs-data -v --dir /files/vbn/ import --record automatic
 
   analyse-vbn:
     build: ./analyse
