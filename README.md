@@ -20,6 +20,9 @@ We are using this setup on a debian linux system with 8GB RAM and 500GB SSD spac
 * About **20GB free disk space** (more if you want to use more than one data source).
 
 **After checkout:**
-* create `secrets/mysql_dystonse_password`and `secrets/mysql_root_password` and write a password into each file. 
-* copy `docker-compose.sample.yml`, add the healthcheck URLs and modify the data for each source to collect, import and analyse. Rename the modified file to `docker-compose.override.yml`.
+* (execute `docker-compose build` to start compiling while you prepare the rest.)
+* copy `sample.env`, edit and rename it, following the instructions inside the file.
+* Check if the entries in `docker-compose.override.yml` match the sources you want to use. You can add new sources by copying the existing entries and changing the name and the references to `<source>.env` files of the services.
 * then, execute `docker-compose up -d`.
+* if you want to see the log output, execute `docker-compose logs -f`
+* (or to combine the last two steps, use `docker-compose up -d && docker-compose logs -f --tail 0`)

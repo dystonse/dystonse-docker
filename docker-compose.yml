@@ -2,16 +2,13 @@ version: "3.3"
 services:
   db:
     image: mysql:8
+    env_file:
+      - .env
     volumes:
       - dbvolume:/var/lib/mysql
-      - ./secrets:/secrets
       - ./db:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /secrets/mysql_root_password
-      MYSQL_USER: dystonse
-      MYSQL_PASSWORD_FILE: /secrets/mysql_dystonse_password
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
@@ -28,13 +25,16 @@ services:
     build: https://github.com/dystonse/dystonse-gtfs-data.git
     image: dystonse-gtfs-data:local
     command: echo "hello world from dystonse-gtfs-data!"
-    # not sure if this is enough to build an image that does nothing 
+    # here, we build an image that does (almost) nothing 
     # but that other containers can use as a parent image
   
-  # collect-services and import-services are defined in docker-compose.override.yml 
-  # which is not commited into the repository because of contained secret values
-  # see docker-compose.sample.yml
+# collect-, import-, and analyse-services for all sources are defined in docker-compose.override.yml
 
 volumes:
   dbvolume:
   filevolume:
+
+  # If you want easy access to the files, we recommend using bind mounts from 
+  # the host's file system instead of internal docker volumes.
+  # Caution: only do this if your host's file system supports 
+  # filenames containing ':' (e.g. Ext file system)!

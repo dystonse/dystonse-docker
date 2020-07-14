@@ -1,0 +1,64 @@
+version: "3.3"
+services:
+
+# vbn (verkehrsverbund bremen/niedersachen) services:
+
+  collect-vbn:
+    build: ./collect
+    env_file:
+      - .env
+      - vbn.env
+    volumes:
+      - filevolume:/files
+
+  import-vbn:
+    image: dystonse-gtfs-data:local
+    env_file: 
+      - .env
+      - vbn.env
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
+    command: sh -c "dystonse-gtfs-data -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict automatic"
+
+  analyse-vbn:
+    build: ./analyse
+    env_file:
+      - .env
+      - vbn.env
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
+
+# vrn (verkehrsverbund rhein-neckar) services:
+
+  collect-vrn:
+    build: ./collect
+    env_file:
+      - .env
+      - vrn.env
+    volumes:
+      - filevolume:/files
+
+  import-vrn:
+    image: dystonse-gtfs-data:local
+    env_file:
+      - .env
+      - vrn.env
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
+    command: sh -c "dystonse-gtfs-data  -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict automatic"
+
+  analyse-vrn:
+    build: ./analyse
+    env_file:
+      - .env
+      - vrn.env
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
