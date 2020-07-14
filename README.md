@@ -10,16 +10,16 @@ We aim to create a docker-compose configuration which can be used to deploy the 
 
 ### Installation Instructions
 
-*System requirements:*
+**System requirements:**
 We are using this setup on a debian linux system with 8GB RAM and 500GB SSD space. But in theory, it should run on any system that fits the following requirements:
 
 * You need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed.
-* It currently only works on *x86 CPUs* because some docker images are not available for ARM.
-* On Windows, volumes (especially the filevolume) need to be standard docker volumes (i.e. using an *Ext filesystem*). On Linux or MacOS, volumes can also be mounted from the host's filesystem.
-* At least *4GB RAM* (we recommend 8GB).
-* About *20GB free disk space* (more if you want to use more than one data source).
+* It currently only works on **x86 CPUs** because some docker images are not available for ARM.
+* On Windows, volumes (especially the filevolume) need to be standard docker volumes (i.e. using an **Ext filesystem**). On Linux or MacOS, volumes can also be mounted from the host's filesystem.
+* At least **4GB RAM** (we recommend 8GB).
+* About **20GB free disk space** (more if you want to use more than one data source).
 
-*After checkout:*
+**After checkout:**
 * create `secrets/mysql_dystonse_password`and `secrets/mysql_root_password` and write a password into each file. 
 * copy `docker-compose.sample.yml`, add the healthcheck URLs and modify the data for each source to collect, import and analyse. Rename the modified file to `docker-compose.override.yml`.
 * then, execute `docker-compose up -d`.
