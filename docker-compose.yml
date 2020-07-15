@@ -23,6 +23,8 @@ services:
   
   dystonse-gtfs-data:
     build: https://github.com/dystonse/dystonse-gtfs-data.git
+    # while developing on dystonse-gtfs-data, you can use this line instead:
+    # build: ../dystonse-gtfs-data
     image: dystonse-gtfs-data:local
     command: echo "hello world from dystonse-gtfs-data!"
     # here, we build an image that does (almost) nothing 
@@ -34,7 +36,22 @@ volumes:
   dbvolume:
   filevolume:
 
-  # If you want easy access to the files, we recommend using bind mounts from 
-  # the host's file system instead of internal docker volumes.
-  # Caution: only do this if your host's file system supports 
-  # filenames containing ':' (e.g. Ext file system)!
+# If you want easy access to the files, we recommend using bind mounts from 
+# the host's file system instead of internal docker volumes.
+# Caution: only do this if your host's file system supports 
+# filenames containing ':' (e.g. Ext file system)!
+# The syntax for named bind mounts looks like this:
+
+# volumes:
+#   dbvolume:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/dystonse/dbvolume
+#   filevolume:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/dystonse/filevolume
