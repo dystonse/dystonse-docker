@@ -20,7 +20,7 @@ services:
       - filevolume:/files
     depends_on:
       - db
-    command: sh -c "dystonse-gtfs-data -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict automatic"
+    command: sh -c "dystonse-gtfs-data -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict --cleanup automatic"
 
   analyse-vbn:
     build: ./analyse
@@ -51,7 +51,7 @@ services:
       - filevolume:/files
     depends_on:
       - db
-    command: sh -c "dystonse-gtfs-data  -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict automatic"
+    command: sh -c "dystonse-gtfs-data  -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ import --record --predict --cleanup automatic"
 
   analyse-vrn:
     build: ./analyse

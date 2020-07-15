@@ -20,8 +20,9 @@ We are using this setup on a debian linux system with 8GB RAM and 500GB SSD spac
 * About **20GB free disk space** (more if you want to use more than one data source).
 
 **After checkout:**
-* copy `sample.env`, edit and rename it, following the instructions inside the file.
+* Copy `sample.env`, edit and rename it, following the instructions inside the file.
 * Check if the entries in `docker-compose.override.yml` match the sources you want to use. You can add new sources by copying the existing entries and changing the name and the references to `<source>.env` files of the services.
-* then, execute `docker-compose up -d`.
-* if you want to see the log output, execute `docker-compose logs -f`
-* (or to combine the last two steps, use `docker-compose up -d && docker-compose logs -f --tail 0`)
+* Compile with `docker-compose build`.
+* Then, execute `docker-compose up -d`.
+* If you want to see the log output, execute `docker-compose logs -f`.
+* (Or to combine the last three steps, use `docker-compose build && docker-compose up -d && docker-compose logs -f --tail 0`.)

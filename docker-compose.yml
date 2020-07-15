@@ -21,14 +21,15 @@ services:
     environment:
       PMA_HOST: db
   
+
+  # here, we build an image that does (almost) nothing 
+  # but that other containers can use as a parent image:
   dystonse-gtfs-data:
     build: https://github.com/dystonse/dystonse-gtfs-data.git
     # while developing on dystonse-gtfs-data, you can use this line instead:
     # build: ../dystonse-gtfs-data
     image: dystonse-gtfs-data:local
     command: echo "hello world from dystonse-gtfs-data!"
-    # here, we build an image that does (almost) nothing 
-    # but that other containers can use as a parent image
   
 # collect-, import-, and analyse-services for all sources are defined in docker-compose.override.yml
 
