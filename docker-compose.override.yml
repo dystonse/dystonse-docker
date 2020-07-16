@@ -6,7 +6,7 @@ services:
   collect-vbn:
     build: ./collect
     env_file:
-      - .env
+      - global.env
       - vbn.env
     volumes:
       - filevolume:/files
@@ -14,7 +14,7 @@ services:
   import-vbn:
     image: dystonse-gtfs-data:local
     env_file: 
-      - .env
+      - global.env
       - vbn.env
     volumes:
       - filevolume:/files
@@ -25,7 +25,7 @@ services:
   analyse-vbn:
     build: ./analyse
     env_file:
-      - .env
+      - global.env
       - vbn.env
     volumes:
       - filevolume:/files
@@ -37,7 +37,7 @@ services:
   collect-vrn:
     build: ./collect
     env_file:
-      - .env
+      - global.env
       - vrn.env
     volumes:
       - filevolume:/files
@@ -45,7 +45,7 @@ services:
   import-vrn:
     image: dystonse-gtfs-data:local
     env_file:
-      - .env
+      - global.env
       - vrn.env
     volumes:
       - filevolume:/files
@@ -56,7 +56,7 @@ services:
   analyse-vrn:
     build: ./analyse
     env_file:
-      - .env
+      - global.env
       - vrn.env
     volumes:
       - filevolume:/files

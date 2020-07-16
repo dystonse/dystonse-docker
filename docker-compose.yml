@@ -3,15 +3,22 @@ services:
   db:
     image: mysql:8
     env_file:
-      - .env
+      - global.env
     volumes:
       - dbvolume:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
+    # if you want to pass startup options to mysqld, do it like this: 
+    # command: mysqld --innodb-buffer-pool-size=2147483648
+    # this example enlarges the buffer pool size to 2GB, which is recommended
+    # if you have enough RAM to spare and disk IO is the bottleneck of your
+    # database performance.
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
+    env_file:
+      - global.env
     ports:
       - 8080:80
     volumes:
@@ -25,10 +32,12 @@ services:
   # here, we build an image that does (almost) nothing 
   # but that other containers can use as a parent image:
   dystonse-gtfs-data:
-    build: https://github.com/dystonse/dystonse-gtfs-data.git
+    # build: https://github.com/dystonse/dystonse-gtfs-data.git
     # while developing on dystonse-gtfs-data, you can use this line instead:
-    # build: ../dystonse-gtfs-data
+    build: ../dystonse-gtfs-data
     image: dystonse-gtfs-data:local
+    env_file:
+      - global.env
     command: echo "hello world from dystonse-gtfs-data!"
   
 # collect-, import-, and analyse-services for all sources are defined in docker-compose.override.yml
