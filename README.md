@@ -15,7 +15,7 @@ We are using this setup on a debian linux system with 8GB RAM and 500GB SSD spac
 
 * You need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed.
 * It currently only works on **x86 CPUs** because some docker images are not available for ARM.
-* On Windows, volumes (especially the filevolume) need to be standard docker volumes (i.e. using an **Ext filesystem**). On Linux or MacOS, volumes can also be mounted from the host's filesystem.
+* The volumes (especially the `filevolume`) need to support filenames containing `:`. Standard docker volumes and most Unix file systems (i.e. **Ext filesystem**) support this. Therefore, on Linux or MacOS hosts, volumes can also be bind-mounted from the host's filesystem. On Windows hosts, don't use bind-mounts.
 * At least **4GB RAM** (we recommend 8GB).
 * About **20GB free disk space** (more if you want to use more than one data source).
 
