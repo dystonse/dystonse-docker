@@ -75,7 +75,9 @@ CREATE TABLE `predictions` (
   `trip_start_date` date NOT NULL,
   `trip_start_time` time NOT NULL,
   `stop_sequence` tinyint UNSIGNED NOT NULL,
-  `prediction_type` tinyint UNSIGNED NOT NULL,
+  `precision_type` tinyint UNSIGNED NOT NULL,
+  `origin_type` tinyint NOT NULL,
+  `sample_size` int UNSIGNED NOT NULL,
   `prediction_curve` binary(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -83,9 +85,10 @@ CREATE TABLE `predictions` (
 -- Indizes für die Tabelle `predictions`
 --
 ALTER TABLE `predictions`
-  ADD PRIMARY KEY (`source`, `event_type`,`stop_sequence`,`trip_start_date`,`route_id`,`trip_id`,`trip_start_time`) USING BTREE,
-  ADD KEY `timespan` (`source`, `prediction_min`,`prediction_max`,`stop_id`,`trip_start_date`) USING BTREE;
+  ADD PRIMARY KEY (`source`,`event_type`,`stop_sequence`,`trip_start_date`,`route_id`,`trip_id`,`trip_start_time`) USING BTREE,
+  ADD KEY `timespan` (`source`,`prediction_min`,`prediction_max`,`stop_id`) USING BTREE;
 COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
