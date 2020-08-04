@@ -14,6 +14,7 @@ services:
     # this example enlarges the buffer pool size to 2GB, which is recommended
     # if you have enough RAM to spare and disk IO is the bottleneck of your
     # database performance.
+    command: mysqld --innodb-buffer-pool-size=2147483648
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
@@ -32,9 +33,9 @@ services:
   # here, we build an image that does (almost) nothing 
   # but that other containers can use as a parent image:
   dystonse-gtfs-data:
-    # build: https://github.com/dystonse/dystonse-gtfs-data.git
+    build: https://github.com/dystonse/dystonse-gtfs-data.git
     # while developing on dystonse-gtfs-data, you can use this line instead:
-    build: ../dystonse-gtfs-data
+    # build: ../dystonse-gtfs-data
     image: dystonse-gtfs-data:local
     env_file:
       - global.env
@@ -42,9 +43,9 @@ services:
   
 # collect-, import-, and analyse-services for all sources are defined in docker-compose.override.yml
 
-volumes:
-  dbvolume:
-  filevolume:
+# volumes:
+#   dbvolume:
+#   filevolume:
 
 # If you want easy access to the files, we recommend using bind mounts from 
 # the host's file system instead of internal docker volumes.
@@ -52,16 +53,16 @@ volumes:
 # filenames containing ':' (e.g. Ext file system)!
 # The syntax for named bind mounts looks like this:
 
-# volumes:
-#   dbvolume:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: /home/dystonse/dbvolume
-#   filevolume:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       o: bind
-#       device: /home/dystonse/filevolume
+volumes:
+  dbvolume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/dystonse/dbvolume
+  filevolume:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/dystonse/filevolume
