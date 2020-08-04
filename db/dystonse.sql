@@ -85,8 +85,8 @@ CREATE TABLE `predictions` (
 -- Indizes für die Tabelle `predictions`
 --
 ALTER TABLE `predictions`
-  ADD PRIMARY KEY (`source`,`event_type`,`stop_sequence`,`trip_start_date`,`route_id`,`trip_id`,`trip_start_time`) USING BTREE,
-  ADD KEY `timespan` (`source`,`prediction_min`,`prediction_max`,`stop_id`) USING BTREE;
+  ADD PRIMARY KEY (`source`,`trip_start_date`,`trip_start_time`,`stop_sequence`,`route_id`,`trip_id`,`event_type`) USING BTREE,
+  ADD KEY `timespan` (`source`,`stop_id`,`prediction_min`,`prediction_max`) USING BTREE;
 COMMIT;
 
 
