@@ -32,6 +32,20 @@ services:
     depends_on:
       - db
 
+  monitor-vbn:
+    image: dystonse-gtfs-data:local
+    env_file: 
+      - global.env
+      - vbn.env
+    ports:
+      - 3000:3000
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
+    command: sh -c "dystonse-gtfs-data -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ monitor"
+
+
 # vrn (verkehrsverbund rhein-neckar) services:
 
   collect-vrn:
