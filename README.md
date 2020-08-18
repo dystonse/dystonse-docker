@@ -21,6 +21,7 @@ We are using this setup on a debian linux system with 8GB RAM and 500GB SSD spac
 
 **After checkout:**
 * Copy `sample.env`, edit and rename it, following the instructions inside the file.
+* If you want to use bind-mounts for `filevolume` and/or `dbvolume`, edit `docker-compose.yml` accordingly and create those directories.
 * Check if the entries in `docker-compose.override.yml` match the sources you want to use. You can add new sources by copying the existing entries and changing the name and the references to `<source>.env` files of the services.
 * Compile with `docker-compose build`.
 * Then, execute `docker-compose up -d`.
