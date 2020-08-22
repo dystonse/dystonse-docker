@@ -10,10 +10,10 @@ services:
     ports:
       - 3306:3306
     # if you want to pass startup options to mysqld, do it like this: 
-    # command: mysqld --innodb-buffer-pool-size=2147483648
+    # command: mysqld --innodb-buffer-pool-size=2147483648  --disable-log-bin
     # this example enlarges the buffer pool size to 2GB, which is recommended
     # if you have enough RAM to spare and disk IO is the bottleneck of your
-    # database performance.
+    # database performance. It also disables bin logs.
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5
@@ -32,9 +32,9 @@ services:
   # here, we build an image that does (almost) nothing 
   # but that other containers can use as a parent image:
   dystonse-gtfs-data:
-    build: https://github.com/dystonse/dystonse-gtfs-data.git
+    # build: https://github.com/dystonse/dystonse-gtfs-data.git
     # while developing on dystonse-gtfs-data, you can use this line instead:
-    # build: ../dystonse-gtfs-data
+    build: ../dystonse-gtfs-data
     image: dystonse-gtfs-data:local
     env_file:
       - global.env
