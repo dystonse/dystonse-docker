@@ -1,5 +1,9 @@
 version: "3.3"
 
+# If you want to use this, please refer to 
+# https://github.com/buchdag/letsencrypt-nginx-proxy-companion-compose 
+# for info about what these services do and how to configure them!
+
 volumes:
   conf:
   vhost:
@@ -46,12 +50,16 @@ services:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     restart: always
 
+ # change this to fit the domain and 
+ # the name of the service you want to use for your 'monitor' website: 
   monitor-vbn:
     environment:
       - VIRTUAL_HOST=monitor.dystonse.org
       - LETSENCRYPT_HOST=monitor.dystonse.org
-      
+   
+  # change this to fit the domain you want to use for your database admin interface:   
   phpmyadmin:
     environment:
       - VIRTUAL_HOST=dba.dystonse.org
       - LETSENCRYPT_HOST=dba.dystonse.org
+  
