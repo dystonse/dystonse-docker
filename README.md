@@ -5,8 +5,9 @@
 We aim to create a docker-compose configuration which can be used to deploy the whole dystonse stack. Currently included:
 * a _mysql_ database, 
 * a _phpmyadmin_ interface
-* data collection scripts which regurlary download gtfs schedules and realtime data, and store it in .zip files
-* the [dystonse-gtfs-data](https://github.com/dystonse/dystonse-gtfs-data) tool, which reads those .zip files, connects schedules and realtime data, writes the trip updates into the database, and analyses the data to generate delay statistics, from which predictions can then be created and written into a separate table in the database, which can then be used to display a passenger information and journey planning website.
+* data collection scripts which regularly download gtfs schedules and realtime data, and store it in .zip files
+* the [dystonse-gtfs-data](https://github.com/dystonse/dystonse-gtfs-data) tool, which reads those .zip files, connects schedules and realtime data, writes the trip updates into the database, and analyses the data to generate delay statistics, from which predictions can then be created and written into a separate table in the database, which can then be used to display a passenger information and journey planning website (monitor). 
+   * **NOTE:** The statistical analyses need a certain amount of data to be successfully created, and the quality improves over time, so if you set this up for the first time with a new data source, you will probably have to wait between 1 and 3 weeks until the predictions are usable.
 * an (optional) _nginx reverse proxy configuration_ for access to the _phpmyadmin_ and _monitor_ web services, to add ssl encryption, caching, compression, and reachability on customized (sub)domains.
 
 ### Installation Instructions
