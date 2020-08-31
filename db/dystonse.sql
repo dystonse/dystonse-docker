@@ -78,7 +78,8 @@ CREATE TABLE `predictions` (
   `precision_type` tinyint UNSIGNED NOT NULL,
   `origin_type` tinyint NOT NULL,
   `sample_size` int UNSIGNED NOT NULL,
-  `prediction_curve` binary(120) NOT NULL
+  `prediction_curve` binary(120) NOT NULL,
+  `schedule_file_name` char(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
