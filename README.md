@@ -37,3 +37,17 @@ If you want to use the nginx reverse proxy:
   * First, edit the file `docker-compose.server.yml` to fit the (sub)domains etc. you want to use. Please read the comments in that file for details.
   * Then compile and execute with `./up.sh`.
   * If you want to see the log output, execute `./do.sh logs -f`.
+
+As noted above, it will take days or even weeks until enough data is collected to create useful delay statistics. If you want to accelerate this process, you can download default statistics like this:
+ * if you use a bind mount for `filevolume`:
+   * `cd $YOUR_FILEVOLUME_DIRECTORY`
+ * if you use regular docker volumes:
+   * enter one of your docker containers with:
+   * `cd dystonse-docker`
+   * `./do.sh exec analyse-vbn /bin/bash` (if you customized your service names, change `analyse-vbn` accordingly)
+   * `cd files`
+ * then, no matter which kind of volume you use:
+   * `cd vbn` (if you use another source name, use it instead of `vbn`) 
+   * `curl https://dystonse.org/static/default_curves.exp`
+   * if you have setup multiple data sources, repeat for each one
+As long as `default_curves.exp` is present, `dystonse-gtfs-data` will combine the specific curves from `all_curves.exp` and the default curves from `default_curves.exp`. If you wish to use the default curves which were gerenated by you own `analyse` containser, simply delete `default_curves.exp`.
