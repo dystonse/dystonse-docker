@@ -56,6 +56,11 @@ services:
     environment:
       - VIRTUAL_HOST=monitor.dystonse.org
       - LETSENCRYPT_HOST=monitor.dystonse.org
+
+  monitor-vrn:
+    environment:
+      - VIRTUAL_HOST=monitor-vrn.dystonse.org
+      - LETSENCRYPT_HOST=monitor-vrn.dystonse.org
    
   # change this to fit the domain you want to use for your database admin interface:   
   phpmyadmin:
