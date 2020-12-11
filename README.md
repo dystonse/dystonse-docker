@@ -12,7 +12,8 @@ We aim to create a docker-compose configuration which can be used to deploy the 
 
 ### Installation Instructions
 
-**System requirements:**
+#### System requirements
+
 We are currently using this setup on a debian linux system with 32GB RAM, 480GB SSD space (for the database) and 4TB HDD space (for the collected realtime and schedule files, statistics and docker images). But in theory, it should run on any system that fits the following requirements:
 
 * You need to have [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/) installed.
@@ -22,7 +23,8 @@ We are currently using this setup on a debian linux system with 32GB RAM, 480GB 
 * About **45GB free disk space**: about 20GB for storing schedules, realtime and statistics files + 20GB for the database + 5GB for docker images. 
 You might need more for different/more data sources or longer time. We are using two data sources with different amounts of data, and have been collecting data for about 6 months. Our data currently take up 17GB (files) + 18GB (database) + 3.5GB (docker images).
 
-**After checkout:**
+#### After checkout
+
 * Copy `sample.env`, edit and rename it, following the instructions inside the file.
 * If you want to use bind-mounts for `filevolume` and/or `dbvolume`, edit `docker-compose.yml` accordingly and create those directories.
 * Check if the entries in `docker-compose.override.yml` match the sources you want to use. You can add new sources by copying the existing entries and changing the name and the references to `<source>.env` files of the services.
@@ -38,7 +40,7 @@ If you want to use the nginx reverse proxy, you need to call `docker-compose` wi
   * Then compile and execute with `./up.sh`.
   * If you want to see the log output, execute `./do.sh logs -f`.
 
-**Set up default statistics for quick start:**
+#### Set up default statistics for quick start
 
 As noted above, it will usually take days or even weeks until enough data is collected to create useful delay statistics. If you want to use the whole stack (including the `monitor` website and the `predict`ions it relies on) as quickly as possible, you can download a set of default statistics to use for your predictions until your `analyse` module can create its own statistics in a usable quality. 
 
