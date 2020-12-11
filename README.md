@@ -33,7 +33,7 @@ If you don't want to use the nginx reverse proxy:
   * If you want to see the log output, execute `docker-compose logs -f`.
   * (Or to combine the last three steps, use `docker-compose build && docker-compose up -d && docker-compose logs -f --tail 0`.)
 
-If you want to use the nginx reverse proxy:
+If you want to use the nginx reverse proxy, you need to call `docker-compose` with all three `.yml` files. Because this is rather tedious, we provide the script `up.sh` and `do.sh`, which will be used in the following instructions: 
   * First, edit the file `docker-compose.server.yml` to fit the (sub)domains etc. you want to use. Please read the comments in that file for details.
   * Then compile and execute with `./up.sh`.
   * If you want to see the log output, execute `./do.sh logs -f`.
@@ -47,7 +47,7 @@ As noted above, it will usually take days or even weeks until enough data is col
  * if you use regular docker volumes:
    * enter your `analyse` docker container with:
    * `cd dystonse-docker`
-   * `./do.sh exec analyse-vbn /bin/bash` (if you customized your service names, change `analyse-vbn` accordingly)
+   * `docker-compose exec analyse-vbn /bin/bash` (if you customized your service names, change `analyse-vbn` accordingly)
    * `cd files`
  * then, no matter which kind of volume you use:
    * `cd vbn` (if you use another source name, use it instead of `vbn`) 
