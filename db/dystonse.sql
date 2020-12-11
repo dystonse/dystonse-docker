@@ -65,13 +65,13 @@ COMMIT;
 --
 
 CREATE TABLE `predictions` (
-  `source` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `source` char(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `event_type` tinyint NOT NULL,
-  `stop_id` char(15) NOT NULL,
+  `stop_id` char(80) NOT NULL,
   `prediction_min` timestamp NOT NULL,
   `prediction_max` timestamp NOT NULL,
-  `route_id` char(15) NOT NULL,
-  `trip_id` char(15) NOT NULL,
+  `route_id` char(80) NOT NULL,
+  `trip_id` char(60) NOT NULL,
   `trip_start_date` date NOT NULL,
   `trip_start_time` time NOT NULL,
   `stop_sequence` tinyint UNSIGNED NOT NULL,
