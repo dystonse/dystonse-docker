@@ -9,7 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "Europe/Berlin";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -65,20 +65,21 @@ COMMIT;
 --
 
 CREATE TABLE `predictions` (
-  `source` char(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `source` char(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `event_type` tinyint NOT NULL,
-  `stop_id` char(15) NOT NULL,
+  `stop_id` char(80) NOT NULL,
   `prediction_min` timestamp NOT NULL,
   `prediction_max` timestamp NOT NULL,
-  `route_id` char(15) NOT NULL,
-  `trip_id` char(15) NOT NULL,
+  `route_id` char(80) NOT NULL,
+  `trip_id` char(60) NOT NULL,
   `trip_start_date` date NOT NULL,
   `trip_start_time` time NOT NULL,
   `stop_sequence` tinyint UNSIGNED NOT NULL,
   `precision_type` tinyint UNSIGNED NOT NULL,
   `origin_type` tinyint NOT NULL,
   `sample_size` int UNSIGNED NOT NULL,
-  `prediction_curve` binary(120) NOT NULL
+  `prediction_curve` binary(120) NOT NULL,
+  `schedule_file_name` char(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

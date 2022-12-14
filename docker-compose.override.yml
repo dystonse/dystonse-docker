@@ -76,3 +76,15 @@ services:
       - filevolume:/files
     depends_on:
       - db
+
+  monitor-vrn:
+    image: dystonse-gtfs-data:local
+    env_file: 
+      - global.env
+      - vrn.env
+    volumes:
+      - filevolume:/files
+    depends_on:
+      - db
+    command: sh -c "dystonse-gtfs-data -v --password $$MYSQL_PASSWORD --dir /files/$$GTFS_DATA_SOURCE_ID/ monitor"
+

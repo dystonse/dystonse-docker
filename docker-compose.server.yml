@@ -1,0 +1,70 @@
+version: "3.3"
+
+# If you want to use this, please refer to 
+# https://github.com/buchdag/letsencrypt-nginx-proxy-companion-compose 
+# for info about what these services do and how to configure them!
+
+volumes:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - certs:/etc/nginx/certs:ro
+      - ./dystonse_proxy.conf:/etc/nginx/conf.d/dystonse_proxy.conf:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+    environment:
+      - ENABLE_IPV6=true
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-le
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam:ro
+      - certs:/etc/nginx/certs
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    restart: always
+
+ # change this to fit the domain and 
+ # the name of the service you want to use for your 'monitor' website: 
+  monitor-vbn:
+    environment:
+      - VIRTUAL_HOST=monitor.dystonse.org
+      - LETSENCRYPT_HOST=monitor.dystonse.org
+
+  monitor-vrn:
+    environment:
+      - VIRTUAL_HOST=monitor-vrn.dystonse.org
+      - LETSENCRYPT_HOST=monitor-vrn.dystonse.org
+   
+  # change this to fit the domain you want to use for your database admin interface:   
+  phpmyadmin:
+    environment:
+      - VIRTUAL_HOST=dba.dystonse.org
+      - LETSENCRYPT_HOST=dba.dystonse.org
+  

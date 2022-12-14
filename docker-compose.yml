@@ -10,10 +10,10 @@ services:
     ports:
       - 3306:3306
     # if you want to pass startup options to mysqld, do it like this: 
-    # command: mysqld --innodb-buffer-pool-size=2147483648
+    # command: mysqld --innodb-buffer-pool-size=2147483648  --disable-log-bin
     # this example enlarges the buffer pool size to 2GB, which is recommended
     # if you have enough RAM to spare and disk IO is the bottleneck of your
-    # database performance.
+    # database performance. It also disables bin logs.
     command: mysqld --innodb-buffer-pool-size=2147483648
 
   phpmyadmin:
@@ -53,16 +53,16 @@ services:
 # filenames containing ':' (e.g. Ext file system)!
 # The syntax for named bind mounts looks like this:
 
-volumes:
-  dbvolume:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/dystonse/dbvolume
-  filevolume:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/dystonse/filevolume
+# volumes:
+#   dbvolume:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/dystonse/dbvolume
+#   filevolume:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/dystonse/filevolume
