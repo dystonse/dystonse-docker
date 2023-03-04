@@ -10,6 +10,7 @@ volumes:
   html:
   dhparam:
   certs:
+  acme:
 
 networks:
   default:
@@ -46,6 +47,7 @@ services:
       - dhparam:/etc/nginx/dhparam:ro
       - certs:/etc/nginx/certs
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     restart: always
@@ -57,10 +59,20 @@ services:
       - VIRTUAL_HOST=monitor.dystonse.org
       - LETSENCRYPT_HOST=monitor.dystonse.org
 
-  monitor-vrn:
+ # monitor-vrn:
+ #   environment:
+ #     - VIRTUAL_HOST=monitor-vrn.dystonse.org
+ #     - LETSENCRYPT_HOST=monitor-vrn.dystonse.org
+  
+  monitor-vbb:
     environment:
-      - VIRTUAL_HOST=monitor-vrn.dystonse.org
-      - LETSENCRYPT_HOST=monitor-vrn.dystonse.org
+      - VIRTUAL_HOST=monitor-vbb.dystonse.org
+      - LETSENCRYPT_HOST=monitor-vbb.dystonse.org
+  
+  monitor-hvv:
+    environment:
+      - VIRTUAL_HOST=monitor-hvv.dystonse.org
+      - LETSENCRYPT_HOST=monitor-hvv.dystonse.org
    
   # change this to fit the domain you want to use for your database admin interface:   
   phpmyadmin:
